@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contagem regressiva – Mesa Redonda</title>
+  <style>
+    body { font-family: system-ui, Arial; padding: 24px; }
+    .box { max-width: 520px; border: 1px solid #ddd; border-radius: 12px; padding: 18px; }
+    .title { font-size: 20px; font-weight: 700; margin: 0 0 10px; }
+    .timer { font-size: 32px; font-weight: 800; }
+    .small { color: #555; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <p class="title">Mesa Redonda: Internet Segura</p>
+    <div class="timer" id="timer">--d --h --m --s</div>
+    <div class="small">Terça-feira, 10 de janeiro de 2026 • 10h00 (ISCED-Huíla)</div>
+  </div>
+
+  <script>
+    // Ajusta para o fuso horário de Angola (UTC+1). Se preferires UTC, muda o offset.
+    const target = new Date("2026-01-10T10:00:00+01:00").getTime();
+
+    function tick() {
+      const now = Date.now();
+      let diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").textContent = "Já começou!";
+        return;
+      }
+
+      const s = Math.floor(diff / 1000);
+      const days = Math.floor(s / 86400);
+      const hours = Math.floor((s % 86400) / 3600);
+      const mins = Math.floor((s % 3600) / 60);
+      const secs = s % 60;
+
+      document.getElementById("timer").textContent =
+        `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
